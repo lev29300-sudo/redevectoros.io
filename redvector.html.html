@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Red Vector OS — Gaming Linux</title>
+    <style>
+        /* -------------------- RESET / BASE -------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0b0b;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #ff3b3b;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* -------------------- HEADER / NAV -------------------- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #ff1a1a;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ff1a1a;
+        }
+
+        .logo small {
+            font-size: 14px;
+            font-weight: 300;
+            color: #888;
+            margin-left: 10px;
+        }
+
+        .nav a {
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff6b6b;
+        }
+
+        /* -------------------- PAGES (вкладки) -------------------- */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .page h1 {
+            font-size: 40px;
+            color: #ff3b3b;
+            margin: 40px 0 15px;
+        }
+
+        .page p {
+            font-size: 18px;
+            color: #bbb;
+            max-width: 800px;
+        }
+
+        .page ul {
+            margin: 20px 0;
+            list-style: none;
+        }
+
+        .page ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #1e1e1e;
+            color: #ccc;
+        }
+
+        .page ul li::before {
+            content: "► ";
+            color: #ff1a1a;
+        }
+
+        /* -------------------- TROLL DOWNLOAD -------------------- */
+        .troll-box {
+            background: #1a0a0a;
+            border: 3px dashed #ff1a1a;
+            border-radius: 20px;
+            padding: 50px 30px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .troll-box .big {
+            font-size: 64px;
+            font-weight: 900;
+            color: #ff1a1a;
+            letter-spacing: 4px;
+        }
+
+        .troll-box .sub {
+            font-size: 24px;
+            color: #ff6b6b;
+            margin: 15px 0;
+        }
+
+        .troll-box .q_q_big {
+            font-size: 80px;
+            color: #ff3333;
+        }
+
+        .btn-rickroll {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 16px 48px;
+            background: #ff1a1a;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-rickroll:hover {
+            background: #cc0000;
+            transform: scale(1.03);
+        }
+
+        /* -------------------- SPECS / FEATURES -------------------- */
+        .specs {
+            background: #111;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 1px solid #2a2a2a;
+        }
+
+        .specs h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ff3b3b;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 30px;
+        }
+
+        .specs-grid li {
+            list-style: none;
+            padding: 6px 0;
+            color: #ccc;
+        }
+
+        .specs-grid li::before {
+            content: "► ";
+            color: #ff1a1a;
+        }
+
+        /* -------------------- FEATURE CARDS -------------------- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #141414;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #ff1a1a;
+        }
+
+        .feature-card h3 {
+            color: #ff3b3b;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: #aaa;
+            font-size: 15px;
+        }
+
+        /* -------------------- CONTACT -------------------- */
+        .contact-block {
+            background: #111;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 1px solid #2a2a2a;
+        }
+
+        .contact-block a {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        /* -------------------- FOOTER -------------------- */
+        footer {
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid #222;
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+        }
+
+        footer .q_q_footer {
+            color: #ff6b6b;
+            font-size: 20px;
+        }
+
+        /* -------------------- RESPONSIVE -------------------- */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .nav a {
+                margin: 0 12px;
+                font-size: 14px;
+            }
+            .page h1 {
+                font-size: 28px;
+            }
+            .troll-box .big {
+                font-size: 40px;
+            }
+            .troll-box .q_q_big {
+                font-size: 50px;
+            }
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="logo">
+            <span>⟡</span> RED VECTOR <small>OS</small>
+        </div>
+        <div class="nav">
+            <a onclick="showPage('home')">Home</a>
+            <a onclick="showPage('features')">Features</a>
+            <a onclick="showPage('download')">Download</a>
+            <a onclick="showPage('docs')">Docs</a>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- ========== PAGE: HOME ======================================== -->
+    <!-- ============================================================ -->
+    <div id="page-home" class="page active">
+        <h1>Welcome to Red Vector OS</h1>
+        <p>
+            The gaming Linux distribution built by gamers, for gamers.  
+            No spying, no bloat — just raw performance and full control.
+        </p>
+
+        <div style="margin: 30px 0; font-size: 22px; color: #ff6b6b;">
+            Q_Q — We care about your FPS.
+        </div>
+
+        <div class="specs">
+            <h2>📌 Quick Facts</h2>
+            <ul class="specs-grid">
+                <li>Based on Arch Linux (stable)</li>
+                <li>Kernel: linux-zen (low latency)</li>
+                <li>Preinstalled: Steam, Lutris, Wine, Proton-GE</li>
+                <li>GameBoost — one-click performance tuning</li>
+                <li>Windows-like interface (no learning curve)</li>
+                <li>Zero telemetry — we don't spy on you</li>
+                <li>Python-powered tools — easy to modify</li>
+                <li>Release: 10 September 2026</li>
+            </ul>
+        </div>
+
+        <p style="color: #888;">
+            📢 Subscribe to get notified when we launch.
+        </p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== PAGE: FEATURES ==================================== -->
+    <!-- ============================================================ -->
+    <div id="page-features" class="page">
+        <h1>🔥 Features</h1>
+        <p>Red Vector OS comes packed with everything a gamer needs — and nothing they don't.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>⚡ GameBoost</h3>
+                <p>One-click CPU/GPU tuning: governor, swappiness, IRQ affinity — your hardware runs at peak.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎮 Steam + Lutris + Wine</h3>
+                <p>Preinstalled and preconfigured. Just launch and play Windows games on Linux.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🪟 Windows-like UI</h3>
+                <p>Taskbar, start menu, file manager — designed for Windows refugees. No confusion.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ No Telemetry</h3>
+                <p>Zero data collection. No "phone home". Your PC is yours.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🧠 Python-Powered</h3>
+                <p>All custom tools (installer, GameBoost, launcher) are written in Python — hackable and open.</p>
+            </div>
+            <div class="feature-card">
+                <h3>❤️ Community Driven</h3>
+                <p>Built by gamers, for gamers. Every release is shaped by real feedback.</p>
+            </div>
+        </div>
+
+        <div class="specs">
+            <h2>🖥️ System Requirements</h2>
+            <ul class="specs-grid">
+                <li><strong>CPU:</strong> Intel Core i3 / AMD Ryzen 3+</li>
+                <li><strong>RAM:</strong> 4 GB (8 GB recommended)</li>
+                <li><strong>GPU:</strong> NVIDIA 900+ / AMD Radeon HD 7000+</li>
+                <li><strong>Disk:</strong> 20 GB free</li>
+                <li><strong>Arch:</strong> x86_64</li>
+                <li><strong>Boot:</strong> UEFI or Legacy BIOS</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== PAGE: DOWNLOAD (TROLL) ============================ -->
+    <!-- ============================================================ -->
+    <div id="page-download" class="page">
+        <h1>📥 Download Red Vector OS</h1>
+
+        <!-- ТРОЛЛЬ-БЛОК (англ + Rickroll) -->
+        <div class="troll-box">
+            <div class="q_q_big">Q_Q</div>
+            <div class="big">NOT YET</div>
+            <div class="sub">We haven't launched yet, bro!</div>
+            <p style="color: #888; max-width: 500px; margin: 15px auto;">
+                Release date: <strong>10 September 2026</strong>.<br>
+                Until then, you can pet the button — it doesn't work anyway.
+            </p>
+
+            <!-- Кнопка с ссылкой на Rickroll (полноэкранный режим) -->
+            <a href="#" 
+               class="btn-rickroll"
+               onclick="openFullscreenRickroll(event)">
+                ⬇️ Download (not really)
+            </a>
+
+            <p style="color: #444; margin-top: 15px; font-size: 13px;">
+                * if you clicked and nothing happened — you did everything right 😄
+            </p>
+        </div>
+
+        <p style="color: #666; text-align: center;">
+            Wanna know when it's out? Subscribe for notifications.
+        </p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== PAGE: DOCS ======================================== -->
+    <!-- ============================================================ -->
+    <div id="page-docs" class="page">
+        <h1>📘 Documentation</h1>
+        <p>Everything you need to know about Red Vector OS — installation, usage, and customization.</p>
+
+        <div class="specs">
+            <h2>📁 Getting Started</h2>
+            <ul>
+                <li><strong>Installation Guide</strong> — how to install Red Vector OS alongside Windows</li>
+                <li><strong>First Boot</strong> — what to do after installation</li>
+                <li><strong>GameBoost</strong> — how to enable performance mode</li>
+                <li><strong>Wi-Fi & Drivers</strong> — network setup and GPU drivers</li>
+                <li><strong>Steam / Lutris / Wine</strong> — playing Windows games on Linux</li>
+                <li><strong>Customization</strong> — changing themes, wallpapers, and panels</li>
+                <li><strong>Python Scripts</strong> — how to modify our tools</li>
+                <li><strong>FAQ</strong> — answers to common questions</li>
+            </ul>
+        </div>
+
+        <p style="color: #888;">
+            📚 Full docs will be available on release day.  
+            For now, feel free to ask us directly.
+        </p>
+
+        <div class="contact-block">
+            <p>✉️ <a href="mailto:lev29300@gmail.com">lev29300@gmail.com</a> &nbsp;|&nbsp; <a href="mailto:momix1122@proton.me">momix1122@proton.me</a></p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== FOOTER ============================================ -->
+    <!-- ============================================================ -->
+    <footer>
+        <div class="q_q_footer">Q_Q</div>
+        <p>© 2026 Red Vector Collective. Made for gamers, not for corporations.</p>
+        <p style="margin-top: 6px; font-size: 12px; color: #444;">Built with 🖤 and Python</p>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ========== JAVASCRIPT ======================================= -->
+<!-- ============================================================ -->
+<script>
+    // Навигация по вкладкам
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('page-' + id);
+        if (target) target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Rickroll — открывается на полный экран с автоплеем
+    function openFullscreenRickroll(event) {
+        event.preventDefault();
+        const url = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&fs=1';
+        const win = window.open(url, '_blank', 'fullscreen=yes,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,resizable=no');
+        if (win) {
+            win.onload = function() {
+                try {
+                    win.document.documentElement.requestFullscreen();
+                } catch (e) {
+                    // ничего страшного, если браузер заблокирует
+                }
+            };
+        }
+    }
+</script>
+
+</body>
+</html>
